@@ -1,0 +1,67 @@
+{
+  "info": {
+     "_postman_id": "7972d841-4c9c-439e-9bce-9d4e4f9dd43e",
+     "name": "Officemate API test",
+     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+     {
+        "name": "Search",
+        "event": [
+           {
+              "listen": "test",
+              "script": {
+                 "exec": [
+                    "var responsedata = pm.iterationData.get(\"response\");\r",
+                    "pm.test(\"Status code is \"+responsedata, function () {\r",
+                    "    pm.response.to.have.status(responsedata);\r",
+                    "});\r",
+                    "\r",
+                    "var totaldata = pm.iterationData.get(\"totalcount\");\r",
+                    "pm.test(\"Total page value is \"+totaldata, function () {\r",
+                    "    var jsonData = pm.response.json();\r",
+                    "    pm.expect(jsonData.products.total_count).to.eql(totaldata);\r",
+                    "});"
+                 ],
+                 "type": "text/javascript"
+              }
+           }
+        ],
+        "protocolProfileBehavior": {
+           "disabledSystemHeaders": {}
+        },
+        "request": {
+           "method": "GET",
+           "header": [
+              {
+                 "key": "x-store-code",
+                 "value": "en",
+                 "type": "text"
+              }
+           ],
+           "url": {
+              "raw": "https://www.officemate.co.th/api/search/products?searchQuery={{input}}",
+              "protocol": "https",
+              "host": [
+                 "www",
+                 "officemate",
+                 "co",
+                 "th"
+              ],
+              "path": [
+                 "api",
+                 "search",
+                 "products"
+              ],
+              "query": [
+                 {
+                    "key": "searchQuery",
+                    "value": "{{input}}"
+                 }
+              ]
+           }
+        },
+        "response": []
+     }
+  ]
+}
